@@ -42,10 +42,10 @@ def chi2_discrete(samples, pmf, alpha=0.05, **kwargs):
     **kwargs: parameters to pass to pmf
     """
     n = len(samples)
-    obs = np.unique(samples, return_counts=True)[1]
+    values, obs = np.unique(samples, return_counts=True)
 
     dof = len(obs) - 1
-    probas = np.array([pmf(i, **kwargs) for i in range(len(obs))])
+    probas = np.array([pmf(i, **kwargs) for i in values])
     sum_of_probas = round(sum(probas), 2)
     assert sum_of_probas == 1, f"Sum of probas = {sum_of_probas} != 1"
     exp = n * probas
